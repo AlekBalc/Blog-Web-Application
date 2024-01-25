@@ -95,6 +95,38 @@ h1 {
     -webkit-box-sizing: border-box;
   }
 
- .delete {
+.delete {
     stroke: red;
-  }
+}
+
+.put {
+    cursor:pointer;
+}
+
+.pen{
+    stroke:black;
+}
+
+.pen:hover {
+    stroke:green;
+}
+.trash{
+    stroke:black;
+}
+.trash:hover{
+    stroke:red;
+}
+
+.enabled-put {
+    stroke:green !important;
+}
+
+.unbutton {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}

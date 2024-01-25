@@ -23,12 +23,13 @@ app.post("/", (req, res) => {
         let index = blogs.findIndex(blog => blog.id == body.id);
         blogs.splice(index, 1);
     } else if (body._method === "PUT") {
+        console.log(body);
         let index = blogs.findIndex(blog => blog.id == body.id);
-        
+        blogs[index] = new Blog(body.title, body.content);
+
     } else {
         blogs.push(new Blog(body.title, body.content));
     }
-    
     res.render("index.ejs", { blogs: blogs });
 })
 

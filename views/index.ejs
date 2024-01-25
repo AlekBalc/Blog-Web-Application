@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <header>
+            <h1>Blog Application</h1>
+        </header>
+    </div>
+    <div class="flex-container">
+
+        <div class="blog">
+            <form action="/" method="post">
+                <input class="title-input block" type="text" placeholder="title" name="title">
+                <textarea class="blog-content-input block" name="content" name="content" placeholder="content"></textarea>
+                <input class="submit-blog block" type="submit" value="+">
+            </form>
+        </div>
+        <% if(locals.blogs) {%>
+        <% blogs.forEach( blog => { %>
+        <div class="blog">
+            <div class="blog-header">
+                <div class="title"><%= blog.title %></div>
+                <form class="put-form" action="/" method="post">
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="id" value="<%=blog.id%>">
+                    <input type="image" alt="Put" src="/svgs/pen.svg" width="40" height="40">
+                </form>
+                <form class="delete-form" action="/" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="id" value="<%=blog.id%>">
+                    <input class="delete" type="image" alt="Delete" src="/svgs/trash.svg" width="40" height="40">
+                </form>
+            </div>
+            <div class="blog-content"><%= blog.content %></div>
+        </div>
+        <% })}; %>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/myJs.js"></script>
+</body>
+</html>

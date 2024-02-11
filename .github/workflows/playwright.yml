@@ -3,7 +3,6 @@ on:
   pull_request:
     branches: [ main, master ]
   schedule:
-    branches: [ main, master ]
     -cron: '9 13 * * *'
 jobs:
   test:

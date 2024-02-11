@@ -17,3 +17,11 @@ test('get started link', async ({ page }) => {
   // Expects page to have a heading with the name of Installation.
   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 });
+
+test('has heading', async ({ page }) => {
+  await page.goto('https://blog-application-d5jj.onrender.com');
+
+  // Expect a title "to contain" a substring.
+  const heading = page.locator("h1");
+  await expect(heading).toBeVisible();
+});

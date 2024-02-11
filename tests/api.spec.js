@@ -2,7 +2,7 @@
 import { test, expect } from "@playwright/test"
 
 test('has heading', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('https://blog-application-d5jj.onrender.com');
 
   // Expect a title "to contain" a substring.
   const heading = page.locator("h1");

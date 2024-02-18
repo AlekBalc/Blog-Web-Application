@@ -1,6 +1,8 @@
 // @ts-check
 import { test, expect } from "@playwright/test"
 
+const url = "http://localhost:3000/";
+
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');
 
@@ -19,7 +21,7 @@ test('get started link', async ({ page }) => {
 });
 
 test('has heading', async ({ page }) => {
-  await page.goto('https://blog-application-d5jj.onrender.com');
+  await page.goto(url);
 
   // Expect a title "to contain" a substring.
   const heading = page.locator("h1");

@@ -1,29 +1,37 @@
 // @ts-check
 import { test, expect } from "@playwright/test"
+import { Page } from "./helpers/page";
+import { DeleteBlog } from "./helpers/request";
+import { time } from "console";
 
-const url = "http://localhost:3000/";
+test.describe("E2E UI tests for demo", async () => {
+  let blogPage;
+  test.beforeEach( async ({page}) => {
+    blogPage = new Page(page);
+  })
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  test('Should have heading', async ({ page }) => {
+    await blogPage.goto();
+  
+    await expect(blogPage.heading).toBeVisible();
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+    expect(await blogPage.heading.innerText()).toBe("Blog Application")
+  });  
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  test('Should create and delete post', async ({ page }) => {
+    const timestamp = Date.now();
+    await blogPage.goto();
+  
+    await blogPage.addBlog(timestamp, "Random content");
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+    const blog = await blogPage.getBlog(timestamp);
+    expect(blog).toBeVisible();
+    
+    await blogPage.deleteBlog(timestamp);
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+    const blog2 = await blogPage.getBlog(timestamp);
+    await expect(blog2).toHaveCount(0);
+  });  
 
-test('has heading', async ({ page }) => {
-  await page.goto(url);
+})
 
-  // Expect a title "to contain" a substring.
-  const heading = page.locator("h1");
-  await expect(heading).toBeVisible();
-});
